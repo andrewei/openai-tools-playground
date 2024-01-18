@@ -24,8 +24,9 @@ npm install
 
 ## Requirements
 
-tesla token in a file .token in /src
-env file with the variables defined in .env.example
+- tesla token in a file .token in /src
+- .env file in root with the variables defined in .env.example.
+- If you don't have all the accounts required for using the tools, just remove them from the index file
 
 ## Usage
 
