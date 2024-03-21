@@ -5,6 +5,9 @@
 ### Tesla
 Can read information from the car, commands are not supported.
 
+### Home Assistant
+Can turn on/off lights, dim, set color.
+
 ### get week number
 Returns the week number of the year.
 
@@ -31,3 +34,11 @@ npm install
 ## Usage
 
 npm run start
+
+
+# Example questions:
+
+Set the light theme to fit the movie "xxxxxxx",
+
+Set the light theme to fit the Tesla battery percentage
+---The light theme has been set to represent the Tesla battery percentage, with the color blue and the brightness level at 63%.
