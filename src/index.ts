@@ -15,6 +15,8 @@ import {getCarInfo, getCarInfoDescription} from "./tools/tesla/getCarInfo";
 import {getRefreshTokenDescription, getTeslaToken} from "./tools/tesla/getTeslaToken";
 import {wikipediaSearchApi, wikipediaSearchApiDescription} from "./tools/wikipedia/wikipediaSearchApi";
 import { sendLightCommandsToHomeAssistant, sendLightCommandsToHomeAssistantDescription } from "./tools/homeAssistant/homeAssistantLights";
+import { getDomainsFromHomeAssistant, getDomainsFromHomeAssistantDescription } from "./tools/homeAssistant/homeAssistantGetDomains";
+import { getDomainInfoFromHomeAssistant, getDomainInfoFromHomeAssistantDescription } from "./tools/homeAssistant/homeAssistantGetDomainInfo";
 dotenv.config()
 
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
@@ -32,6 +34,8 @@ const toolsMapping = {
     run_js_code_in_docker: generateAndRunJsCodeInDocker,
     wikipedia_search_api: wikipediaSearchApi,
     send_light_commands_to_home_assistant: sendLightCommandsToHomeAssistant,
+    get_domains_from_home_assistant: getDomainsFromHomeAssistant,
+    get_domain_info_from_home_assistant: getDomainInfoFromHomeAssistant
 };
 
 const tools = [
@@ -44,7 +48,9 @@ const tools = [
     getRefreshTokenDescription,
     runJSCodeInDockerDescription,
     wikipediaSearchApiDescription,
-    sendLightCommandsToHomeAssistantDescription
+    sendLightCommandsToHomeAssistantDescription,
+    getDomainsFromHomeAssistantDescription,
+    getDomainInfoFromHomeAssistantDescription
 ];
 
 const systemMessage = "You are an informative AI that helps user with different questions. You have been provided with different tools to help answer these questions.";
