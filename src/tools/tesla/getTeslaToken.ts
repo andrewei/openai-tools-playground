@@ -7,7 +7,8 @@ export const getTeslaToken = async () => {
   const url = `https://auth.tesla.com/oauth2/v3/token`;
 
   try {
-  const response = await axios.post(url, {
+    console.log("sending tesla request")
+    const response = await axios.post(url, {
     grant_type: 'refresh_token',
     client_id: 'ownerapi',
     refresh_token: refreshToken,
@@ -17,7 +18,7 @@ export const getTeslaToken = async () => {
   if(response.status !== 200) {
     return "Could not update token";
   }
-  //console.log(response);
+  console.log(response);
   const data = response.data;
   //console.log(data);
   fs.writeFileSync('src/.token', data.access_token);
