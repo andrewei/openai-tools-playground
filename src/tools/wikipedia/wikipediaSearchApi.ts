@@ -19,7 +19,8 @@ export const wikipediaSearchApiDescription = {
     name: "wikipedia_search_api",
     description: "Search wikipedia for a given query.",
     parameters: {
-      type: "object", properties: {
+      type: "object",
+      properties: {
         message: {
           type: "string",
           description: "The query to search for, e.g. 'How many people live in Norway?.",

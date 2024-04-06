@@ -48,7 +48,8 @@ export const googleSearchApiDescription = {
     name: "google_search_api",
     description: "Search google for a given query.",
     parameters: {
-      type: "object", properties: {
+      type: "object",
+      properties: {
         message: {
           type: "string",
           description: "The query to search for, e.g. 'Who won the football world cup in 2023?.",

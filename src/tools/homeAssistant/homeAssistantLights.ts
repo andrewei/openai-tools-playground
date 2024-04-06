@@ -1,7 +1,7 @@
 import axios from 'axios';
 import fs from 'fs';
 
-export const sendLightCommandsToHomeAssistant = async (data: {light: string, color: string, on: number}) => {
+export const sendLightCommandsToHomeAssistant = async (data: {light: string, color: string, rgb_color: Array<number>, on: number, flash: number}) => {
   try {
     console.log("Sending light commands to home assistant")
     const token = fs.readFileSync('src/ha.token', 'utf-8').trim();
@@ -12,9 +12,10 @@ export const sendLightCommandsToHomeAssistant = async (data: {light: string, col
     } else {
       area = [data.light];
     }
+
     const response = await axios.post('http://192.168.1.42:8123/api/services/light/turn_on', {
       area_id: area,
-      color_name: data.color,
+      rgb_color: data.rgb_color,
       brightness_pct: data.on
     }, {
       headers: {
@@ -23,7 +24,7 @@ export const sendLightCommandsToHomeAssistant = async (data: {light: string, col
       }
     });
 
-    //console.log(response.data);
+    console.log(response.data);
   } catch (error) {
     console.error(error);
   }
@@ -40,8 +41,15 @@ export const sendLightCommandsToHomeAssistantDescription = {
     parameters: {
       type: "object", properties: {
         light: {"type": "string", "description": "The area to controll, soverom, kjokken, stue, of all if none is defined"},
-        color: {"type": "string", "description": "The color to set the light to"},
-        on: {"type": "number", "description": "dim levels, from 0 to 100, 0 is off, 100 is full brightness"}
+        rgb_color: {
+          type: "array",
+          description: "The rgb color to set the light to, [255, 255, 255] is white, [0, 0, 0] is black",
+          items: {
+            type: "number",
+          },
+        },
+        on: {"type": "number", "description": "dim levels, from 0 to 100, 0 is off, 100 is full brightness"},
+        flash: {"type": "string", "description": "The type of flash to use, short, long"},
         },
     },
   }
