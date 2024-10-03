@@ -5,3 +5,5 @@ node_modules
 .idea
 pythonCode.py
 *.token
+.gitsecret/keys/random_seed
+!*.secret
