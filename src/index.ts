@@ -17,6 +17,7 @@ import {wikipediaSearchApi, wikipediaSearchApiDescription} from "./tools/wikiped
 import { sendLightCommandsToHomeAssistant, sendLightCommandsToHomeAssistantDescription } from "./tools/homeAssistant/homeAssistantLights";
 import { getDomainsFromHomeAssistant, getDomainsFromHomeAssistantDescription } from "./tools/homeAssistant/homeAssistantGetDomains";
 import { getDomainInfoFromHomeAssistant, getDomainInfoFromHomeAssistantDescription } from "./tools/homeAssistant/homeAssistantGetDomainInfo";
+import {killSelf, killSelfDescription} from "./tools/killSelf/killSelf";
 dotenv.config()
 
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
@@ -35,7 +36,8 @@ const toolsMapping = {
     wikipedia_search_api: wikipediaSearchApi,
     send_light_commands_to_home_assistant: sendLightCommandsToHomeAssistant,
     get_domains_from_home_assistant: getDomainsFromHomeAssistant,
-    get_domain_info_from_home_assistant: getDomainInfoFromHomeAssistant
+    get_domain_info_from_home_assistant: getDomainInfoFromHomeAssistant,
+    kill_self: killSelf,
 };
 
 const tools = [
@@ -50,7 +52,8 @@ const tools = [
     wikipediaSearchApiDescription,
     sendLightCommandsToHomeAssistantDescription,
     getDomainsFromHomeAssistantDescription,
-    getDomainInfoFromHomeAssistantDescription
+    getDomainInfoFromHomeAssistantDescription,
+    killSelfDescription
 ];
 
 const systemMessage = "You are an informative AI that helps user with different questions. You have been provided with different tools to help answer these questions.";

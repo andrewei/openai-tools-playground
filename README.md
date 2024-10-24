@@ -20,6 +20,12 @@ Generates and runs JS code.
 ### Generate and run Python code
 Generates and runs Python code.
 
+### Search wikipedia
+Searches wikipedia for a given search term.
+
+### KillSelf (circle of life)
+Has the ability to kill itself.
+Will be used for reloading source code on changes.
 
 ## Installation
 
