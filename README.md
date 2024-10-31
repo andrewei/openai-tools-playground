@@ -27,6 +27,10 @@ Searches wikipedia for a given search term.
 Has the ability to kill itself.
 Will be used for reloading source code on changes.
 
+### notes
+
+Can store and retrieve notes from file.
+
 ## Installation
 
 npm install

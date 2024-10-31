@@ -8,3 +8,4 @@ pythonCode.py
 .gitsecret/keys/random_seed
 !*.secret
 chatHistory.json
+note.json

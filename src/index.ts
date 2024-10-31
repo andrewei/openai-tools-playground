@@ -19,6 +19,8 @@ import { getDomainsFromHomeAssistant, getDomainsFromHomeAssistantDescription } f
 import { getDomainInfoFromHomeAssistant, getDomainInfoFromHomeAssistantDescription } from "./tools/homeAssistant/homeAssistantGetDomainInfo";
 import {killSelf, killSelfDescription} from "./tools/killSelf/killSelf";
 import fs from "fs";
+import {writeNote, writeNoteDescription} from "./tools/notes/writeNote";
+import {readNote, readNoteDescription} from "./tools/notes/readNote";
 dotenv.config()
 
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
@@ -39,6 +41,8 @@ const toolsMapping = {
     get_domains_from_home_assistant: getDomainsFromHomeAssistant,
     get_domain_info_from_home_assistant: getDomainInfoFromHomeAssistant,
     kill_self: killSelf,
+    write_note: writeNote,
+    read_note: readNote
 };
 
 const tools = [
@@ -54,7 +58,9 @@ const tools = [
     sendLightCommandsToHomeAssistantDescription,
     getDomainsFromHomeAssistantDescription,
     getDomainInfoFromHomeAssistantDescription,
-    killSelfDescription
+    killSelfDescription,
+    writeNoteDescription,
+    readNoteDescription
 ];
 
 const systemMessage = "You are an informative AI that helps user with different questions. You have been provided with different tools to help answer these questions.";
