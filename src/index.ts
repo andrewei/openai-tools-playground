@@ -95,7 +95,6 @@ async function runQuery(query, messages) {
             //Storing messages to file to keep context between restarts
             const fs = require('fs');
             fs.writeFileSync('chatHistory.json', JSON.stringify(messages));
-            console.log(messages);
             return responseMessage.content;
         }
     }
