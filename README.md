@@ -41,6 +41,12 @@ npm install
 
 npm run start
 
+# Memory
+
+The memory is stored in a file called chatHistory.json, and will be loaded on startup,
+and stored for each question. This, in combination with the killSelf function, will
+allow the bot to relead the source code while persisting the memory.
+
 
 # Example questions:
 

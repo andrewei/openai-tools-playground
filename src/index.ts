@@ -18,6 +18,7 @@ import { sendLightCommandsToHomeAssistant, sendLightCommandsToHomeAssistantDescr
 import { getDomainsFromHomeAssistant, getDomainsFromHomeAssistantDescription } from "./tools/homeAssistant/homeAssistantGetDomains";
 import { getDomainInfoFromHomeAssistant, getDomainInfoFromHomeAssistantDescription } from "./tools/homeAssistant/homeAssistantGetDomainInfo";
 import {killSelf, killSelfDescription} from "./tools/killSelf/killSelf";
+import fs from "fs";
 dotenv.config()
 
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
@@ -90,12 +91,30 @@ async function runQuery(query, messages) {
             messages.push({
                 role: responseMessage.role, content: responseMessage.content,
             });
+
+            //Storing messages to file to keep context between restarts
+            const fs = require('fs');
+            fs.writeFileSync('chatHistory.json', JSON.stringify(messages));
+            console.log(messages);
             return responseMessage.content;
         }
     }
 }
 async function main() {
-    const messages = [{ role: "system", content: systemMessage }];
+    const fs = require('fs');
+    let messages = [];
+    //messages = [{ role: "system", content: systemMessage }];
+    if (fs.existsSync('chatHistory.json')) {
+        console.log("Reading chat history from file");
+        const chatHistory = fs.readFileSync('chatHistory.json', 'utf-8');
+        messages = JSON.parse(chatHistory);
+    }
+    else {
+        //Read messages from file to keep context between restarts
+        console.log("No chat history found, new conversation");
+        messages = [{ role: "system", content: systemMessage }];
+    }
+
     const prompt = promptSync();
     while (true) {
         const query = prompt("Enter your query: ");

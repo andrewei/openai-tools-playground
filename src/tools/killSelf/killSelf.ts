@@ -6,7 +6,7 @@ export const killSelf = async (args) => {
 export const killSelfDescription = {
   type: "function", function: {
     name: "kill_self",
-    description: "exit the process, to enable restarting/killing yourself with new code. Can be /wrist, as in emo, you know...",
+    description: "exit the process, to enable restarting/killing yourself with new code. Can be /wrist, like in slash wrist",
     parameters: {
       type: "object", properties: {
         code: {type: "number", description: "The exit code to return"
