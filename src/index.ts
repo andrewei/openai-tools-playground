@@ -119,6 +119,7 @@ async function runQuery(query, messages) {
     }
 }
 async function main() {
+    try {
     const fs = require('fs');
     let messages = [];
     //messages = [{ role: "system", content: systemMessage }];
@@ -150,6 +151,10 @@ async function main() {
         const response = await runQuery(query, messages);
         console.log(response)
     }
+    } catch (error) {
+        console.log(error);
+        process.exit(1);
+    }
 }
 
-main().catch(console.error);
+main();
