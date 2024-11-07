@@ -60,7 +60,7 @@ export const generateAndRunJsCodeInDocker = async (args) => {
   });
 }
 
-export const generateAndRunJSCode = {
+export const generateAndRunJSCodeDescription = {
     type: "function", function: {
       name: "generate_and_run_js_code",
       description: "Generate and run some javascript code that can solve the problem at hand. End the program with a console.log() with the result",

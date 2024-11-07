@@ -1,11 +1,13 @@
+/*Insert import here*/
 import dotenv from "dotenv";
 import {dateDescription, getDate} from "./tools/date/date";
 import {getWeekNumber} from "./tools/weekNumber/weekNumber";
 import promptSync from "prompt-sync";
 import {googleSearchApi, googleSearchApiDescription} from "./tools/google/googleSearchApi";
 import OpenAI from "openai";
+
 import {
-    generateAndRunJSCode,
+    generateAndRunJSCodeDescription,
     generateAndRunJsCode,
     generateAndRunJsCodeInDocker, runJSCodeInDockerDescription
 } from "./tools/jsGenerator/jsGenerator";
@@ -21,46 +23,56 @@ import {killSelf, killSelfDescription} from "./tools/killSelf/killSelf";
 import fs from "fs";
 import {writeNote, writeNoteDescription} from "./tools/notes/writeNote";
 import {readNote, readNoteDescription} from "./tools/notes/readNote";
+import {
+    showFunctionsExample,
+    showFunctionsExampleDescription
+} from "./tools/showFunctionsExample/showFunctionsExample";
+import {writeOpenAIFunction, writeOpenAIFunctionDescription} from "./tools/writeOpenAIFunction/writeOpenAIFunction";
 dotenv.config()
 
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 const openai = new OpenAI({apiKey: OPENAI_API_KEY});
 
 const toolsMapping = {
+    /*Insert tool here*/
     get_week_number: getWeekNumber,
     get_date: getDate,
     google_search_api: googleSearchApi,
-    generate_and_run_js_code: generateAndRunJsCode,
+    //generate_and_run_js_code: generateAndRunJsCode,
     get_car_info: getCarInfo,
     wake_up_car: wakeUpCar,
-    generate_and_run_python_code: generateAndRunPythonCode,
+    //generate_and_run_python_code: generateAndRunPythonCode,
     get_refresh_token_from_tesla: getTeslaToken,
-    run_js_code_in_docker: generateAndRunJsCodeInDocker,
+    //run_js_code_in_docker: generateAndRunJsCodeInDocker,
     wikipedia_search_api: wikipediaSearchApi,
     send_light_commands_to_home_assistant: sendLightCommandsToHomeAssistant,
     get_domains_from_home_assistant: getDomainsFromHomeAssistant,
     get_domain_info_from_home_assistant: getDomainInfoFromHomeAssistant,
     kill_self: killSelf,
     write_note: writeNote,
-    read_note: readNote
+    read_note: readNote,
+    show_functions_example: showFunctionsExample,
+    write_openai_function: writeOpenAIFunction
 };
-
 const tools = [
+    /*Insert tool description here*/
     dateDescription,
     googleSearchApiDescription,
-    generateAndRunJSCode,
-    generateAndRunPythonCodeDescription,
+    //generateAndRunJSCodeDescription,
+    //generateAndRunPythonCodeDescription,
+    writeOpenAIFunctionDescription,
     wakeUpCarDescription,
     getCarInfoDescription,
     getRefreshTokenDescription,
-    runJSCodeInDockerDescription,
+    //runJSCodeInDockerDescription,
     wikipediaSearchApiDescription,
     sendLightCommandsToHomeAssistantDescription,
     getDomainsFromHomeAssistantDescription,
     getDomainInfoFromHomeAssistantDescription,
     killSelfDescription,
     writeNoteDescription,
-    readNoteDescription
+    readNoteDescription,
+    showFunctionsExampleDescription
 ];
 
 const systemMessage = "You are an informative AI that helps user with different questions. You have been provided with different tools to help answer these questions.";
@@ -83,6 +95,7 @@ async function runQuery(query, messages) {
                 console.log("---Calling tool number: " + toolNumber++);
                 const functionToCallName = toolCall.function.name;
                 const functionToCall = toolsMapping[functionToCallName];
+                console.log(toolCall.function.arguments)
                 const functionArgs = JSON.parse(toolCall.function.arguments);
                 console.log(`---Calling function ${functionToCallName}`);
                 console.log("---Function args ...:", functionArgs);
