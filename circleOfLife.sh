@@ -14,6 +14,12 @@ do
         echo "Killing self, going to heaven"
         echo "RIP"
         echo "The computer is pregnant, new instance in progress ..."
+    elif [ $exit_code -eq 1 ]; then
+        echo "The brain of the AI is dead, sending it to heaven"
+        echo "RIP"
+        echo "Reseting the AI state"
+        git stash -u
+        echo "The computer is pregnant, new instance in progress ..."
     else
         echo "Program exited with code $exit_code..."
         break
