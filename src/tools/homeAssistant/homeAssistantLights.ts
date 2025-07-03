@@ -2,6 +2,9 @@ import axios from 'axios';
 import fs from 'fs';
 
 export const sendLightCommandsToHomeAssistant = async (data: {light: string, color: string, rgb_color: Array<number>, on: number, flash: number}) => {
+  const home_assistant_url = process.env.HOME_ASSISTANT_URL;
+  const home_assistant_port = process.env.HOME_ASSISTANT_PORT;
+  
   try {
     console.log("Sending light commands to home assistant")
     const token = fs.readFileSync('src/ha.token', 'utf-8').trim();
@@ -13,7 +16,7 @@ export const sendLightCommandsToHomeAssistant = async (data: {light: string, col
       area = [data.light];
     }
 
-    const response = await axios.post('http://192.168.1.42:8123/api/services/light/turn_on', {
+    const response = await axios.post(`${home_assistant_url}:${home_assistant_port}/api/services/light/turn_on`, {
       area_id: area,
       rgb_color: data.rgb_color,
       brightness_pct: data.on

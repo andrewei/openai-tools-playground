@@ -3,13 +3,16 @@ import { data } from 'cheerio/lib/api/attributes';
 import fs from 'fs';
 
 export const getDomainsFromHomeAssistant = async () => {
+  const home_assistant_url = process.env.HOME_ASSISTANT_URL;
+  const home_assistant_port = process.env.HOME_ASSISTANT_PORT;
+
   try {
     console.log("Geting services from home assistant")
     const token = fs.readFileSync('src/ha.token', 'utf-8').trim();
     //console.log("Token: ", token);
     let area = [] as any;
       console.log("Sending get request for home_assistant")
-      const response = await axios.get("http://192.168.1.42:8123/api/services",
+      const response = await axios.get(`${home_assistant_url}:${home_assistant_port}/api/services`,
         {
           headers: {
           'Content-Type': 'application/json',
