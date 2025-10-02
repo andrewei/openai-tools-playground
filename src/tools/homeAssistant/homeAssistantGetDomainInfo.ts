@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { data } from 'cheerio/lib/api/attributes';
 import fs from 'fs';
 
 export const getDomainInfoFromHomeAssistant = async (data: {domain: string}) => {
