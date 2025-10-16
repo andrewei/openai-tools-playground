@@ -106,7 +106,7 @@ async function runQuery(query, messages) {
 			messages.push(responseMessage);
 			console.log(`[AI] Tool calls detected: ${toolCalls.length}`);
 			for (const toolCall of toolCalls) {
-				let functionToCallName, functionArgs;
+				let functionToCallName: any, functionArgs: any;
 				if (toolCall.type === "function" && toolCall.function) {
 					functionToCallName = toolCall.function.name;
 					functionArgs = JSON.parse(toolCall.function.arguments);
@@ -131,7 +131,7 @@ async function runQuery(query, messages) {
 					continue;
 				}
 				console.log(`[AI] Arguments:`, functionArgs);
-				let functionResponse;
+				let functionResponse: any;
 				try {
 					functionResponse = await functionToCall(functionArgs);
 					console.log(`[AI] Tool response:`, functionResponse);
