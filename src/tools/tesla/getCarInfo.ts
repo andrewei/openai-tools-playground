@@ -1,5 +1,5 @@
-import fs from "fs";
 import axios from "axios";
+import fs from "fs";
 
 export const getCarInfo = async () => {
 	const vin = process.env.TESLA_VIN;

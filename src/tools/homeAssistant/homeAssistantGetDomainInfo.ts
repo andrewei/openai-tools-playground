@@ -10,7 +10,7 @@ export const getDomainInfoFromHomeAssistant = async (data: {
 		console.log("domain" + domain);
 		const token = fs.readFileSync("src/ha.token", "utf-8").trim();
 		//console.log("Token: ", token);
-		let area = [] as any;
+		const area = [] as any;
 		console.log("Sending get request for home_assistant");
 		const response = await axios.get("http://192.168.1.42:8123/api/services", {
 			headers: {

@@ -24,7 +24,7 @@ export const googleSearchApi = async (args) => {
 		$("script, style").remove();
 
 		// Get the text content of p and header tags, excluding comments
-		let text = $("p, h1, h2, h3, h4, h5, h6")
+		const text = $("p, h1, h2, h3, h4, h5, h6")
 			.contents()
 			.filter(function () {
 				return this.type !== "comment";

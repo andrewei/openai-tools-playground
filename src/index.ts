@@ -1,48 +1,49 @@
 import dotenv from "dotenv";
-import { dateDescription, getDate } from "./tools/date/date";
-import { getWeekNumber } from "./tools/weekNumber/weekNumber";
+import fs from "fs";
+import { OpenAI } from "openai";
 import promptSync from "prompt-sync";
+import { dateDescription, getDate } from "./tools/date/date";
 import {
 	googleSearchApi,
 	googleSearchApiDescription,
 } from "./tools/google/googleSearchApi";
-import { OpenAI } from "openai";
+import {
+	getDomainInfoFromHomeAssistant,
+	getDomainInfoFromHomeAssistantDescription,
+} from "./tools/homeAssistant/homeAssistantGetDomainInfo";
+import {
+	getDomainsFromHomeAssistant,
+	getDomainsFromHomeAssistantDescription,
+} from "./tools/homeAssistant/homeAssistantGetDomains";
+import {
+	sendLightCommandsToHomeAssistant,
+	sendLightCommandsToHomeAssistantDescription,
+} from "./tools/homeAssistant/homeAssistantLights";
 import {
 	generateAndRunJSCode,
 	generateAndRunJsCode,
 	generateAndRunJsCodeInDocker,
 	runJSCodeInDockerDescription,
 } from "./tools/jsGenerator/jsGenerator";
+import { killSelf, killSelfDescription } from "./tools/killSelf/killSelf";
+import { readNote, readNoteDescription } from "./tools/notes/readNote";
+import { writeNote, writeNoteDescription } from "./tools/notes/writeNote";
 import {
 	generateAndRunPythonCode,
 	generateAndRunPythonCodeDescription,
 } from "./tools/pythonGenerator/pythonGenerator";
-import { wakeUpCar, wakeUpCarDescription } from "./tools/tesla/wakeUpCar";
 import { getCarInfo, getCarInfoDescription } from "./tools/tesla/getCarInfo";
 import {
 	getRefreshTokenDescription,
 	getTeslaToken,
 } from "./tools/tesla/getTeslaToken";
+import { wakeUpCar, wakeUpCarDescription } from "./tools/tesla/wakeUpCar";
+import { getWeekNumber } from "./tools/weekNumber/weekNumber";
 import {
 	wikipediaSearchApi,
 	wikipediaSearchApiDescription,
 } from "./tools/wikipedia/wikipediaSearchApi";
-import {
-	sendLightCommandsToHomeAssistant,
-	sendLightCommandsToHomeAssistantDescription,
-} from "./tools/homeAssistant/homeAssistantLights";
-import {
-	getDomainsFromHomeAssistant,
-	getDomainsFromHomeAssistantDescription,
-} from "./tools/homeAssistant/homeAssistantGetDomains";
-import {
-	getDomainInfoFromHomeAssistant,
-	getDomainInfoFromHomeAssistantDescription,
-} from "./tools/homeAssistant/homeAssistantGetDomainInfo";
-import { killSelf, killSelfDescription } from "./tools/killSelf/killSelf";
-import fs from "fs";
-import { writeNote, writeNoteDescription } from "./tools/notes/writeNote";
-import { readNote, readNoteDescription } from "./tools/notes/readNote";
+
 dotenv.config();
 
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;

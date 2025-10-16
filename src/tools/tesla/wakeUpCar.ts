@@ -1,5 +1,5 @@
-import fs from "fs";
 import axios from "axios";
+import fs from "fs";
 import OpenAI from "openai";
 
 export const wakeUpCar = async () => {

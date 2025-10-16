@@ -9,7 +9,7 @@
 		"format": "biome format",
 		"format:fix": "biome format --write",
 		"lint": "biome check",
-		"lint:fix": "biome check --apply"
+		"lint:fix": "biome check --fix"
 	},
 	"keywords": [],
 	"author": "",

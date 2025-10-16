@@ -1,5 +1,5 @@
-import fs from "fs";
 import { exec } from "child_process";
+import fs from "fs";
 
 export const generateAndRunJsCode = async (args) => {
 	console.log(args);
