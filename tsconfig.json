@@ -1,13 +1,11 @@
 {
-  "compilerOptions": {
-    "outDir": "./built",
-    "allowJs": true,
-    "target": "es5",
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
-    "paths": {
-
-    }
-  },
-  "include": ["./src/**/*"]
+	"compilerOptions": {
+		"outDir": "./built",
+		"allowJs": true,
+		"target": "es5",
+		"allowSyntheticDefaultImports": true,
+		"esModuleInterop": true,
+		"paths": {}
+	},
+	"include": ["./src/**/*"]
 }
