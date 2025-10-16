@@ -3,7 +3,7 @@ import {dateDescription, getDate} from "./tools/date/date";
 import {getWeekNumber} from "./tools/weekNumber/weekNumber";
 import promptSync from "prompt-sync";
 import {googleSearchApi, googleSearchApiDescription} from "./tools/google/googleSearchApi";
-import OpenAI from "openai";
+import { OpenAI } from "openai";
 import {
     generateAndRunJSCode,
     generateAndRunJsCode,
@@ -66,40 +66,63 @@ const tools = [
 const systemMessage = "You are an informative AI that helps user with different questions. You have been provided with different tools to help answer these questions.";
 
 async function runQuery(query, messages) {
-    console.log("<-------------------------Thinking----------------------------->");
-    messages.push({role: "user", content: query});
+    console.log("\n[AI] Thinking about your query...\n");
+    messages.push({ role: "user", content: query });
     let toolNumber = 1;
     while (true) {
         const response = await openai.chat.completions.create({
-            model: "gpt-3.5-turbo-1106", messages: messages, tools: tools as any, tool_choice: "auto",
+            model: "gpt-3.5-turbo-1106",
+            messages: messages,
+            tools: tools as any,
+            tool_choice: "auto",
         });
         const responseMessage = response.choices[0].message;
         const toolCalls = responseMessage.tool_calls;
-        if (responseMessage.tool_calls) {
+        if (toolCalls && toolCalls.length > 0) {
             messages.push(responseMessage);
-            console.log("<-------------------------Calling tools----------------------------->")
-            console.log("toolCalls.length: " + toolCalls.length);
+            console.log("[AI] Tool calls detected: " + toolCalls.length);
             for (const toolCall of toolCalls) {
-                console.log("---Calling tool number: " + toolNumber++);
-                const functionToCallName = toolCall.function.name;
+                let functionToCallName, functionArgs;
+                if (toolCall.type === "function" && toolCall.function) {
+                    functionToCallName = toolCall.function.name;
+                    functionArgs = JSON.parse(toolCall.function.arguments);
+                    console.log(`\n[AI] Calling function tool #${toolNumber}: ${functionToCallName}`);
+                } else if (toolCall.type === "custom" && toolCall.custom) {
+                    functionToCallName = toolCall.custom.name;
+                    functionArgs = toolCall.custom.input; // adjust if your custom tools expect input differently
+                    console.log(`\n[AI] Calling custom tool #${toolNumber}: ${functionToCallName}`);
+                } else {
+                    console.error(`[AI] Unknown tool call type:`, toolCall);
+                    continue;
+                }
                 const functionToCall = toolsMapping[functionToCallName];
-                const functionArgs = JSON.parse(toolCall.function.arguments);
-                console.log(`---Calling function ${functionToCallName}`);
-                console.log("---Function args ...:", functionArgs);
-                const functionResponse = await functionToCall(functionArgs);
-                console.log("---Function result ...:", functionResponse);
+                if (!functionToCall) {
+                    console.error(`[AI] Tool '${functionToCallName}' not found in toolsMapping.`);
+                    continue;
+                }
+                console.log(`[AI] Arguments:`, functionArgs);
+                let functionResponse;
+                try {
+                    functionResponse = await functionToCall(functionArgs);
+                    console.log(`[AI] Tool response:`, functionResponse);
+                } catch (err) {
+                    functionResponse = `Error: ${err?.message || err}`;
+                    console.error(`[AI] Tool error:`, err);
+                }
                 messages.push({
-                    tool_call_id: toolCall.id, role: "tool", name: functionToCallName, content: functionResponse,
+                    tool_call_id: toolCall.id,
+                    role: "tool",
+                    name: functionToCallName,
+                    content: functionResponse,
                 });
+                toolNumber++;
             }
         } else {
-            console.log("<-------------------------Done--------------------------------->");
+            console.log("[AI] No tool calls. Returning response.\n");
             messages.push({
-                role: responseMessage.role, content: responseMessage.content,
+                role: responseMessage.role,
+                content: responseMessage.content,
             });
-
-            //Storing messages to file to keep context between restarts
-            const fs = require('fs');
             fs.writeFileSync('chatHistory.json', JSON.stringify(messages));
             return responseMessage.content;
         }
