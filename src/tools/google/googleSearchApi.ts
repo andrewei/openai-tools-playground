@@ -38,7 +38,7 @@ export const googleSearchApi = async (args) => {
 
 		//console.log(data.items[0]);
 		//console.log(snippets)
-		return JSON.stringify(snippets) + " " + res;
+		return `${JSON.stringify(snippets)} ${res}`;
 	} catch (error) {
 		console.log(error);
 		return JSON.stringify(

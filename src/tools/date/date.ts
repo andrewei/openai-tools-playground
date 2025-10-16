@@ -1,8 +1,7 @@
 //Create a function to get date
-export const getDate = async (args) => {
+export const getDate = async (_args) => {
 	const today = new Date();
-	const date =
-		today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
+	const date = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
 	return JSON.stringify(date);
 };
 

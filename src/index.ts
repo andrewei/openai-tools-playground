@@ -1,5 +1,5 @@
+import fs from "node:fs";
 import dotenv from "dotenv";
-import fs from "fs";
 import { OpenAI } from "openai";
 import promptSync from "prompt-sync";
 import { dateDescription, getDate } from "./tools/date/date";
@@ -104,7 +104,7 @@ async function runQuery(query, messages) {
 		const toolCalls = responseMessage.tool_calls;
 		if (toolCalls && toolCalls.length > 0) {
 			messages.push(responseMessage);
-			console.log("[AI] Tool calls detected: " + toolCalls.length);
+			console.log(`[AI] Tool calls detected: ${toolCalls.length}`);
 			for (const toolCall of toolCalls) {
 				let functionToCallName, functionArgs;
 				if (toolCall.type === "function" && toolCall.function) {
@@ -159,7 +159,7 @@ async function runQuery(query, messages) {
 	}
 }
 async function main() {
-	const fs = require("fs");
+	const fs = require("node:fs");
 	let messages = [];
 	//messages = [{ role: "system", content: systemMessage }];
 	if (fs.existsSync("chatHistory.json")) {

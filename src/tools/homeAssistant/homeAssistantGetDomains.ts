@@ -1,5 +1,5 @@
+import fs from "node:fs";
 import axios from "axios";
-import fs from "fs";
 
 export const getDomainsFromHomeAssistant = async () => {
 	const home_assistant_url = process.env.HOME_ASSISTANT_URL;
@@ -9,7 +9,7 @@ export const getDomainsFromHomeAssistant = async () => {
 		console.log("Geting services from home assistant");
 		const token = fs.readFileSync("src/ha.token", "utf-8").trim();
 		//console.log("Token: ", token);
-		const area = [] as any;
+		const _area = [] as any;
 		console.log("Sending get request for home_assistant");
 		const response = await axios.get(
 			`${home_assistant_url}:${home_assistant_port}/api/services`,

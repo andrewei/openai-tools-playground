@@ -1,7 +1,7 @@
 //create new token from Tesla with refresh token stored in src/.refresh_token
 
+import fs from "node:fs";
 import axios from "axios";
-import fs from "fs";
 
 export const getTeslaToken = async () => {
 	const refreshToken = fs.readFileSync("src/.refreshToken", "utf8").trim();

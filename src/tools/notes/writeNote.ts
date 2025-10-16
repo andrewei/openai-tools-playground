@@ -1,6 +1,6 @@
 //Create a function to get date
 export const writeNote = async ({ note }: { note: string }) => {
-	const fs = require("fs");
+	const fs = require("node:fs");
 	const date = new Date();
 	const noteObj = {
 		note,

@@ -1,6 +1,5 @@
+import fs from "node:fs";
 import axios from "axios";
-import fs from "fs";
-import OpenAI from "openai";
 
 export const wakeUpCar = async () => {
 	const vin = process.env.TESLA_VIN;
@@ -21,7 +20,7 @@ export const wakeUpCar = async () => {
 
 		if (response.status !== 200) {
 			return JSON.stringify(
-				"Could not wake up car: " + data.error + " : " + data.error.desciption,
+				`Could not wake up car: ${data.error} : ${data.error.desciption}`,
 			);
 		}
 

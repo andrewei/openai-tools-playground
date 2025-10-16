@@ -1,5 +1,5 @@
+import fs from "node:fs";
 import axios from "axios";
-import fs from "fs";
 
 export const getCarInfo = async () => {
 	const vin = process.env.TESLA_VIN;
@@ -15,7 +15,7 @@ export const getCarInfo = async () => {
 
 		if (response.status !== 200) {
 			return JSON.stringify(
-				"Could not get car info " + data.error + " : " + data.error.desciption,
+				`Could not get car info ${data.error} : ${data.error.desciption}`,
 			);
 		}
 

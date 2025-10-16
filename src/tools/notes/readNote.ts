@@ -1,6 +1,6 @@
 //Create a function to get date
 export const readNote = async () => {
-	const fs = require("fs");
+	const fs = require("node:fs");
 	let notes = [];
 	if (fs.existsSync("note.json")) {
 		notes = JSON.parse(fs.readFileSync("note.json", "utf8"));

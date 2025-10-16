@@ -1,7 +1,7 @@
 import axios from "axios";
 
-export const getWeekNumber = async (args) => {
-	const today = new Date();
+export const getWeekNumber = async (_args) => {
+	const _today = new Date();
 	const url = `https://ukenummer.no/json`;
 	try {
 		const response = await axios.get(url);

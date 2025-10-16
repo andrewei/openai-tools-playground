@@ -1,5 +1,5 @@
+import fs from "node:fs";
 import axios from "axios";
-import fs from "fs";
 
 export const sendLightCommandsToHomeAssistant = async (data: {
 	light: string;

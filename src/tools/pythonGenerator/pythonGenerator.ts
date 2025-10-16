@@ -1,11 +1,11 @@
 export const generateAndRunPythonCode = async (args) => {
 	console.log(args);
 	//Store the code in a file
-	const fs = require("fs");
+	const fs = require("node:fs");
 	const code = args.code;
 	fs.writeFileSync("pythonCode.py", code);
 	//Run the code
-	const { exec } = require("child_process");
+	const { exec } = require("node:child_process");
 
 	return new Promise((resolve, reject) => {
 		try {

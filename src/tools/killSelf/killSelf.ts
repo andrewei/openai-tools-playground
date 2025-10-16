@@ -1,5 +1,5 @@
 //Create a function to get date
-export const killSelf = async (args) => {
+export const killSelf = async (_args) => {
 	process.exit(66);
 };
 
