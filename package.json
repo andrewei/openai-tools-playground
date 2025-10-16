@@ -1,21 +1,28 @@
 {
-  "name": "openai-tools-playground",
-  "version": "1.0.0",
-  "description": "",
-  "main": "build/index.js",
-  "scripts": {
-    "start": "npx ts-node src/index.ts",
-    "test": ""
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "axios": "1.12.2",
-    "dotenv": "17.2.3",
-    "openai": "6.3.0",
-    "prompt-sync": "4.2.0",
-    "python-shell": "5.0.0",
-    "ts-node": "10.9.2"
-  }
+	"name": "openai-tools-playground",
+	"version": "1.0.0",
+	"description": "",
+	"main": "build/index.js",
+	"scripts": {
+		"start": "npx ts-node src/index.ts",
+		"test": "",
+		"format": "biome format",
+		"format:fix": "biome format --write",
+		"lint": "biome check",
+		"lint:fix": "biome check --fix"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"axios": "1.12.2",
+		"dotenv": "17.2.3",
+		"openai": "6.3.0",
+		"prompt-sync": "4.2.0",
+		"python-shell": "5.0.0",
+		"ts-node": "10.9.2"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "2.2.6"
+	}
 }
