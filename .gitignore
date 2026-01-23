@@ -9,3 +9,5 @@ pythonCode.py
 !*.secret
 chatHistory.json
 note.json
+CLAUDE.local.md
+generated_images/

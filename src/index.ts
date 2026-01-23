@@ -2,6 +2,10 @@ import fs from "node:fs";
 import dotenv from "dotenv";
 import { OpenAI } from "openai";
 import promptSync from "prompt-sync";
+import {
+	generateDalleImage,
+	generateDalleImageDescription,
+} from "./tools/dalle/dalleImageGenerator";
 import { dateDescription, getDate } from "./tools/date/date";
 import {
 	googleSearchApi,
@@ -52,6 +56,7 @@ const openai = new OpenAI({ apiKey: OPENAI_API_KEY });
 const toolsMapping = {
 	get_week_number: getWeekNumber,
 	get_date: getDate,
+	generate_dalle_image: generateDalleImage,
 	google_search_api: googleSearchApi,
 	generate_and_run_js_code: generateAndRunJsCode,
 	get_car_info: getCarInfo,
@@ -70,6 +75,7 @@ const toolsMapping = {
 
 const tools = [
 	dateDescription,
+	generateDalleImageDescription,
 	googleSearchApiDescription,
 	generateAndRunJSCode,
 	generateAndRunPythonCodeDescription,
