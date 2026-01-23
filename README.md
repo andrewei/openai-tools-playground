@@ -23,6 +23,9 @@ Generates and runs Python code.
 ### Search wikipedia
 Searches wikipedia for a given search term.
 
+### DALL-E Image Generation
+Generates images using OpenAI's DALL-E 3 model based on text prompts. Images are saved locally to `generated_images/` folder. Supports three sizes: square (1024x1024), landscape (1792x1024), and portrait (1024x1792).
+
 ### KillSelf (circle of life)
 Has the ability to kill itself.
 Will be used for reloading source code on changes.

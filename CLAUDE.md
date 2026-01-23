@@ -16,7 +16,15 @@ npm run format       # Check code formatting
 npm run format:fix   # Auto-fix formatting issues
 ```
 
-There are no tests configured for this project.
+## Testing
+
+After making changes that could affect whether code runs or compiles, verify by running:
+
+```bash
+npx ts-node test-query.ts "Hvilken dato er det i dag?"
+```
+
+This tests the core functionality: TypeScript compilation, OpenAI API integration, and tool execution.
 
 ## Architecture
 

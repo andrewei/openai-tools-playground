@@ -15,7 +15,7 @@ export const sendLightCommandsToHomeAssistant = async (data: {
 		console.log("Sending light commands to home assistant");
 		const token = fs.readFileSync("src/ha.token", "utf-8").trim();
 		//console.log("Token: ", token);
-		let area = [] as any;
+		let area: string[] = [];
 		if (!data.light || data.light === "all") {
 			area = ["soverom", "kjokken", "stue"];
 		} else {
