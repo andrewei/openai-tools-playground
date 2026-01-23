@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import dotenv from "dotenv";
 import { OpenAI } from "openai";
+import type { ChatCompletionTool } from "openai/resources/chat/completions";
 import promptSync from "prompt-sync";
 import {
 	generateDalleImage,
@@ -103,7 +104,7 @@ async function runQuery(query, messages) {
 		const response = await openai.chat.completions.create({
 			model: "gpt-3.5-turbo-1106",
 			messages: messages,
-			tools: tools as any,
+			tools: tools as ChatCompletionTool[],
 			tool_choice: "auto",
 		});
 		const responseMessage = response.choices[0].message;
@@ -112,7 +113,7 @@ async function runQuery(query, messages) {
 			messages.push(responseMessage);
 			console.log(`[AI] Tool calls detected: ${toolCalls.length}`);
 			for (const toolCall of toolCalls) {
-				let functionToCallName: any, functionArgs: any;
+				let functionToCallName: string, functionArgs: unknown;
 				if (toolCall.type === "function" && toolCall.function) {
 					functionToCallName = toolCall.function.name;
 					functionArgs = JSON.parse(toolCall.function.arguments);
@@ -137,7 +138,7 @@ async function runQuery(query, messages) {
 					continue;
 				}
 				console.log(`[AI] Arguments:`, functionArgs);
-				let functionResponse: any;
+				let functionResponse: unknown;
 				try {
 					functionResponse = await functionToCall(functionArgs);
 					console.log(`[AI] Tool response:`, functionResponse);
