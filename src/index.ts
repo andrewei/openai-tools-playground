@@ -102,7 +102,7 @@ async function runQuery(query, messages) {
 	let toolNumber = 1;
 	while (true) {
 		const response = await openai.chat.completions.create({
-			model: "gpt-3.5-turbo-1106",
+			model: "gpt-4o",
 			messages: messages,
 			tools: tools as ChatCompletionTool[],
 			tool_choice: "auto",
